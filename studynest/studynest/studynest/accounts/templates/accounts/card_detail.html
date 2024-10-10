@@ -1,0 +1,64 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e9edf5 !important;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; 
+        padding-top: 50px; 
+        height: calc(100% - 50px);
+    }
+
+    .content_card {
+        width: 350px;
+        background: #f4f7fc;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #2673e0;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    a {
+        display: block;
+        width: 100%;
+        background: #6c757d;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    a:hover {
+        background: #5a6268;
+    }
+</style>
+
+<div class="container">
+    <div class="content_card">
+        <h2>{{ card.frente }}</h2>
+        <p>{{ card.resposta }}</p>
+        <p>Dificuldade: {{ card.get_dificuldade_display }}</p>
+        <a href="{% url 'baralho_detail' card.baralho.id %}">Voltar para Baralho</a>
+    </div>
+</div>
+{% endblock %}

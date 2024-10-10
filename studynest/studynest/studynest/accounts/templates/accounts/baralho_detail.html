@@ -1,0 +1,175 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e9edf5 !important;
+       
+    }
+
+    .deck_card {
+        width: 350px;
+        margin: auto;
+        background: #f4f7fc;
+        padding: 20px;
+        
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .deck_card h2 {
+        color: #2673e0;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .btn-primary {
+        background: #2673e0;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+    }
+
+    .btn-danger {
+        background: #d9534f;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+    }
+
+    .deck-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center; 
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.card {
+    position: relative;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+  
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+    .card h3 {
+        margin-top: 0;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .card p {
+        margin: 10px 0;
+        color: #666;
+    }
+
+    .card a {
+        color: #2673e0;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .btn-danger {
+    background: #d9534f;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: white !important;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background: #585555;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: white !important;
+    position: absolute;
+    top: 10px;
+    left: 10px; 
+    cursor: pointer;
+}
+
+
+    .btn-modal {
+        width: 150px;
+        background: #2673e0;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .estudar {
+        background-color: rgb(22, 192, 79);
+        color: #fff !important;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+</style>
+
+<div class="deck_card">
+    <h2>{{ baralhos.title }}</h2>
+
+    <div class="button-group">
+        <button class="btn-primary estudar">Estudar Baralho</button>
+        <a href="{% url 'card_create' baralhos.id %}" class="btn-modal">Adicionar Novo Card</a>
+        
+    </div>
+
+    <div class="card-container deck-list">
+        {% for card in cards %}
+        <div class="card">
+            <a href="{% url 'card_update' card.id %}" class="btn-edit">E</a> 
+            <a href="{% url 'card_delete' card.id %}" class="btn-danger">X</a>
+            <h3>{{ card.frente }}</h3>
+            <p>Dificuldade: {{ card.get_dificuldade_display }}</p>
+            <a href="{% url 'card_detail' card.id %}" class="estudar">Estudar Card</a> <br>
+        </div>
+        {% endfor %}
+    </div>
+
+  
+</div>
+{% endblock %}
+

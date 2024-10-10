@@ -1,0 +1,82 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e9edf5 !important;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; 
+        padding-top: 50px; 
+        height: calc(100% - 50px); 
+    }
+
+    .form_card {
+        width: 350px;
+        background: #f4f7fc;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #2673e0;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .btn-danger {
+        width: 100%;
+        background: #dc3545 !important;
+        color: white !important;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 10px;
+    }
+
+    a {
+        display: block;
+        width: 100%;
+        background: #6c757d;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    a:hover {
+        background: #5a6268;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="form_card">
+        <h2>Excluir Card</h2>
+        <p>Tem certeza que deseja excluir o card "{{ card.frente }}"?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+        <a href="{% url 'baralho_detail' card.baralho.id %}">Cancelar</a>
+    </div>
+</div>
+{% endblock %}

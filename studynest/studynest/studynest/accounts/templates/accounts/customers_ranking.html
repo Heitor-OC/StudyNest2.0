@@ -1,0 +1,135 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+           
+                <h5>Notas</h5>
+                <hr>
+
+                <!---->
+                <div class="row">
+                    <div class="col">
+                     <div class="col-md">
+                      <div class="card text-center text-white  mb-3" id="nota-basicos">
+                         <div class="card-header">
+                          <h5 class="card-title">Básicos</h5>
+                         </div>
+                         <div class="card-body">
+                           <h3 class="card-title">{{current_customer.nota_conhec_basicos}}</h3>
+                         </div>
+                      </div>
+                     </div>
+                    </div>
+                   
+                    <div class="col">
+                     <div class="col-md">
+                      <div class="card text-center text-white  mb-3" id="nota-especificos">
+                         <div class="card-header">
+                          <h5 class="card-title">Específicos</h5>
+                         </div>
+                         <div class="card-body">
+                           <h3 class="card-title">{{current_customer.nota_conhec_especificos}}</h3>
+                         </div>
+                      </div>
+                     </div>
+                    </div>
+                   
+                    <div class="col">
+                     <div class="col-md">
+                      <div class="card text-center text-white  mb-3" id="nota-final">
+                         <div class="card-header">
+                          <h5 class="card-title">Final</h5>
+                         </div>
+                         <div class="card-body">
+                           <h3 class="card-title">{{current_customer.nota_final}}</h3>
+                         </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                <!---->
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Classificação</h5>
+            <hr>
+            {% for customer in customers %}
+                {% if customer.posicao_no_ranking %}
+                    <h1 style="text-align: center;padding: 10px">{{customer.posicao_no_ranking}}</h1>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            {% endfor %}
+
+            {% if filter_type is not None %}
+                <p>Filtro: {{ filter_type }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                {{customer_filter.form}}
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+    </div>
+    
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Classificação</th>
+                    <th>Nome</th>
+                    <th>Básicas</th>
+                    <th>Específicas</th>
+                    <th>Nota Final</th>
+                </tr>
+
+                
+                {% for customer in customers %}
+                    
+                    {% if customer.posicao_no_ranking == customer.classificacao %}
+                        <style>
+                            .logged-in td {
+                                background-color: #0D6EFD;
+                            }
+                        </style>
+                        <tr class="logged-in">
+                            <td>{{customer.classificacao}}</td>
+                            <td>{{customer.nome}}</td>
+                            <td>{{customer.nota_conhec_basicos}}</td>
+                            <td>{{customer.nota_conhec_especificos}}</td>
+                            <td>{{customer.nota_final}}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{customer.classificacao}}</td>
+                            <td>{{customer.nome}}</td>
+                            <td>{{customer.nota_conhec_basicos}}</td>
+                            <td>{{customer.nota_conhec_especificos}}</td>
+                            <td>{{customer.nota_final}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

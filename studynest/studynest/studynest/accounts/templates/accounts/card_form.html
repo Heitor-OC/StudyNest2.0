@@ -1,0 +1,75 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e9edf5 !important;
+    }
+
+    .form-container {
+        width: 350px;
+        margin: auto;
+        background: #f4f7fc;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        color: #2673e0;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+        border-radius: 5px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #2673e0;
+        color: white;
+    }
+
+    .voltar {
+        background: #757677;
+        color: white; 
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0px;
+        border-radius: 5px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
+
+<div class="form-container">
+    <h2>{% if card %}Editar Card{% else %}Criar Card{% endif %}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-primary">{% if card %}Atualizar{% else %}Criar{% endif %}</button>
+        <a href="{% url 'baralho_detail' card.id %}" class="voltar">Voltar</a>
+    </form>
+</div>
+{% endblock %}

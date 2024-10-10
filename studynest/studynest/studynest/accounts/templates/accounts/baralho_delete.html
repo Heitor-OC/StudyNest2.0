@@ -1,0 +1,66 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e9edf5 !important;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #f4f7fc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #2673e0;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        width: 48%;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background-color: #c0392b;
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #7f8c8d;
+    }
+</style>
+
+<div class="container">
+    <h2>Excluir Baralho</h2>
+    <p>Tem certeza de que deseja excluir o baralho "{{ baralho.title }}"?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <div style="display: flex; justify-content: space-between;">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

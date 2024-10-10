@@ -1,0 +1,84 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e9edf5 !important;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; 
+        height: calc(100vh - 70px); 
+        padding-top: 70px;
+    }
+
+    .form_card {
+        width: 350px;
+        background: #f4f7fc;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .form_card h2 {
+        color: #2673e0;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        background: #2673e0 !important;
+        color: white !important;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 10px;
+    }
+
+    .btn-secondary {
+        width: 100%;
+        background: #6c757d !important;
+        color: white !important;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .form-control {
+        border: 1px solid #2673e0 !important;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .form-control:focus {
+        box-shadow: none !important;
+        outline: none !important;
+        border-color: #2673e0 !important;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="form_card">
+        <h2>{{ form.instance.pk|yesno:"Editar Baralho,Criar Baralho" }}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

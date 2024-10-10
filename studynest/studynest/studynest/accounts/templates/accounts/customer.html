@@ -1,0 +1,70 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Customer: {{customer.name}}</h5>
+            <hr>
+            <a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
+            <a class="btn btn-outline-info  btn-sm btn-block" href="">Place Order</a>
+
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Classificação</h5>
+            <hr>
+            <h1 style="text-align: center;padding: 10px">Trocar isso: {{order_count}}</h1>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                <p>Trocar de order para ranking</p>
+                {{myFilter.form}}
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+    </div>
+    
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Classificação</th>
+                    <th>Nome</th>
+                    <th>Básicas</th>
+                    <th>Específicas</th>
+                    <th>Nota Final</th>
+                </tr>
+
+                
+                {% for customer in customers %}
+                <tr>
+                    <td>Trocar</td>
+                    <td>{{customer.nome}}</td>
+                    <td>{{customer.nota_conhec_basicos}}</td>
+                    <td>{{customer.nota_conhec_especificos}}</td>
+                    <td>{{customer.nota_final}}</td>
+                   
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
