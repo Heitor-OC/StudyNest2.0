@@ -1,0 +1,31 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/baralhos/baralho_detail.css' %}">
+
+<div class="deck_card">
+    <h2>{{ baralhos.title }}</h2>
+
+    <div class="button-group">
+        <button class="btn-primary estudar">Estudar Baralho</button>
+        <a href="{% url 'card_create' baralhos.id %}" class="btn-modal">Adicionar Novo Card</a>
+        
+    </div>
+
+    <div class="card-container deck-list">
+        {% for card in cards %}
+        <div class="card">
+            <a href="{% url 'card_update' card.id %}" class="btn-edit">E</a> 
+            <a href="{% url 'card_delete' card.id %}" class="btn-danger">X</a>
+            <h3>{{ card.frente }}</h3>
+            <p>Dificuldade: {{ card.get_dificuldade_display }}</p>
+            <a href="{% url 'card_detail' card.id %}" class="estudar">Estudar Card</a> <br>
+        </div>
+        {% endfor %}
+    </div>
+
+  
+</div>
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cards/card_delete.css' %}">
+
+<div class="container">
+    <div class="form_card">
+        <h2>Excluir Card</h2>
+        <p>Tem certeza que deseja excluir o card "{{ card.frente }}"?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+        <a href="{% url 'baralho_detail' card.baralho.id %}">Cancelar</a>
+    </div>
+</div>
+{% endblock %}

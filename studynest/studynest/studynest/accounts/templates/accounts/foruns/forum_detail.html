@@ -1,0 +1,39 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/foruns/forum_detail.css' %}">
+
+
+<body>
+    <h1>{{ forum.title }}</h1>
+    <p><strong>Criado por:</strong> {{ forum.customer.username }}</p>
+    <p><strong>Data:</strong> {{ forum.date_created }}</p>
+
+    <h2>Mensagens</h2>
+    {% if mensagens %}
+        <ul>
+            {% for mensagem in mensagens %}
+                <li>
+                    {{ mensagem.conteudo }}
+                    <form action="{% url 'mensagem_delete' forum.id mensagem.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Excluir</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Não há mensagens neste fórum.</p>
+    {% endif %}
+
+    <h2>Adicionar nova mensagem</h2>
+    <form action="{% url 'mensagem_create' forum.id %}" method="post">
+        {% csrf_token %}
+        <textarea name="conteudo" placeholder="Digite sua mensagem"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <a href="{% url 'foruns_home' %}">Voltar para lista de fóruns</a>
+</body>
+{% endblock %}

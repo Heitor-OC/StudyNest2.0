@@ -42,4 +42,15 @@ urlpatterns = [
     path('card/update/<int:id>/', views.card_update, name='card_update'),
     path('card/delete/<int:id>/', views.card_delete, name='card_delete'),
 
+    # Foruns
+    path('foruns/', views.foruns_home, name='foruns_home'),
+    path('foruns/create/', views.forum_create, name='forum_create'),
+    path('forum/update/<int:id>/', views.forum_update, name='forum_update'),
+    path('forum/delete/<int:id>/', views.forum_delete, name='forum_delete'),
+    
+    # Foruns e Mensagens
+    path('forum/<int:id>/', views.forum_detail, name='forum_details'),
+    path('forum/<int:forum_id>/mensagem/create/', views.mensagem_create, name='mensagem_create'),
+    path('forum/<int:forum_id>/mensagem/delete/<int:mensagem_id>/', views.mensagem_delete, name='mensagem_delete'),
+
 ]

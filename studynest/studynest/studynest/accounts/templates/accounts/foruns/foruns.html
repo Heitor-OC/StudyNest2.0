@@ -1,0 +1,61 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/foruns/foruns.css' %}">
+
+<a href="{% url 'forum_create' %}" class="criar-baralho">Criar Forum</a>
+<div class="container">
+    <div class="deck_card">        
+        <div class="deck-list">
+            {% for forum in foruns %}
+                <div class="card">
+                    <a href="{% url 'forum_update' forum.id %}" class="btn-edit">E</a> 
+                    <h3 class="baralho-title">{{ forum.title }}</h3>
+                    <!-- Trocar isso pra liberar a funcionalidade das mensagens, próxima sprint
+                    <a href="{% url 'forum_details' forum.id %}" class="btn btn-primary">Abrir fórum</a>
+                    -->                    
+
+                    <a href="{% url 'home' %}" class="btn btn-primary">!Abrir fórum!</a>
+
+                    <button class="btn btn-danger" onclick="showModal({{ forum.id }}, '{{ forum.title }}')">X</button>
+                </div>
+            {% empty %}
+                <p style="text-align: center;">Não há nenhum fórum cadastrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <p id="modalText">Tem certeza que deseja excluir o forum?</p>
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" onclick="hideModal()">Cancelar</button>
+            <form id="deleteForm" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-modal">Confirmar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showModal(forumId, forumTitle) {
+        const modal = document.getElementById('confirmModal');
+        const modalText = document.getElementById('modalText');
+        modalText.textContent = `Tem certeza que deseja excluir o forum "${forumTitle}"?`;
+
+        const deleteForm = document.getElementById('deleteForm');
+        deleteForm.action = `/forum/delete/${forumId}/`;
+
+        modal.style.display = 'flex';
+    }
+
+    function hideModal() {
+        const modal = document.getElementById('confirmModal');
+        modal.style.display = 'none';
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cards/card_detail.css' %}">
+
+<div class="container">
+    <div class="content_card">
+        <h2>{{ card.frente }}</h2>
+        <p>{{ card.resposta }}</p>
+        <p>Dificuldade: {{ card.get_dificuldade_display }}</p>
+        <a href="{% url 'baralho_detail' card.baralho.id %}">Voltar para Baralho</a>
+    </div>
+</div>
+{% endblock %}

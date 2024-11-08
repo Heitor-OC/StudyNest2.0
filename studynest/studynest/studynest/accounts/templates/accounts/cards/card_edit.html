@@ -1,0 +1,15 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cards/card_edit.css' %}">
+
+<div class="form-container">
+    <h2>{% if card %}Editar Card{% else %}Criar Card{% endif %}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-primary">{% if card %}Atualizar{% else %}Criar{% endif %}</button>
+    </form>
+</div>
+{% endblock %}

@@ -26,6 +26,11 @@ class BaralhoForm(forms.ModelForm):
     class Meta:
         model = Baralho
         fields = ['title']
+        
+class ForumForm(forms.ModelForm):
+    class Meta:
+        model = Forum
+        fields = ['title']
 
 class CardForm(forms.ModelForm):
     class Meta:

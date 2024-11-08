@@ -1,0 +1,18 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/foruns/forum_delete.css' %}">
+
+<div class="container">
+    <h2>Excluir Forum</h2>
+    <p>Tem certeza de que deseja excluir o forum "{{ forum.title }}"?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <div style="display: flex; justify-content: space-between;">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

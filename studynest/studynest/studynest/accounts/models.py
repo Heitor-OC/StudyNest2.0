@@ -40,4 +40,23 @@ class Card(models.Model):
     dificuldade = models.CharField(max_length=20, choices=ESCOLHAS_DE_DIFICULDADE, default='facil')  # Nível de dificuldade
     
     def __str__(self):
-        return f"{self.front} - {self.difficulty}"
+        return f"{self.frente} - {self.dificuldade}"
+
+
+class Forum(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200, null=False)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
+
+class Mensagem(models.Model):
+    id = models.AutoField(primary_key=True)
+    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='mensagens')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)  
+    conteudo = models.TextField(null=False)  
+    
+    def __str__(self):
+        return self.conteudo[:50]

@@ -1,0 +1,18 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/baralhos/baralho_form.css' %}">
+
+<div class="container">
+    <div class="form_card">
+        <h2>{{ form.instance.pk|yesno:"Editar Baralho,Criar Baralho" }}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
